@@ -8,6 +8,21 @@ const isWhiteScreenshot = require('./is-white-screenshot')
 const waitForPrism = require('./pretty')
 const timeSpan = require('./time-span')
 const overlay = require('./overlay')
+const { waitForDomStability, resolveWaitForDom, DEFAULT_WAIT_FOR_DOM } = require('./wait-for-dom')
+
+const createElapsed = () => {
+  const start = Date.now()
+  return () => Date.now() - start
+}
+
+const getPageSnapshot = page =>
+  page.evaluate(() => ({
+    title: document.title || '',
+    bodyText: document.body ? document.body.innerText || '' : '',
+    url: window.location.href || ''
+  }))
+
+const defaultIsPageReady = ({ isWhite }) => !isWhite
 
 const getBoundingClientRect = element => {
   const { top, left, height, width, x, y } = element.getBoundingClientRect()
@@ -31,37 +46,6 @@ const waitForImagesOnViewport = page =>
         .map(el => el.decode())
     )
   )
-
-const waitForDomStability = ({ idle, timeout } = {}) =>
-  new Promise(resolve => {
-    if (!document.body) return resolve({ status: 'no-body' })
-
-    let lastChange = performance.now()
-    const observer = new window.MutationObserver(() => {
-      lastChange = performance.now()
-    })
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: false,
-      characterData: false
-    })
-
-    const deadline = performance.now() + timeout
-
-    ;(function check () {
-      const now = performance.now()
-      if (now - lastChange >= idle) {
-        observer.disconnect()
-        return resolve({ status: 'idle' })
-      }
-      if (now >= deadline) {
-        observer.disconnect()
-        return resolve({ status: 'timeout' })
-      }
-      window.requestAnimationFrame(check)
-    })()
-  })
 
 const scrollFullPageToLoadContent = async (page, timeout) => {
   const debug = require('debug-logfmt')('browserless:goto')
@@ -115,16 +99,28 @@ module.exports = ({ goto, ...gotoOpts }) => {
   return function screenshot (page) {
     return async (
       url,
-      { codeScheme = 'atom-dark', overlay: overlayOpts = {}, waitUntil = 'auto', ...opts } = {}
+      {
+        codeScheme = 'atom-dark',
+        overlay: overlayOpts = {},
+        waitUntil = 'auto',
+        waitForDom = DEFAULT_WAIT_FOR_DOM,
+        isPageReady = defaultIsPageReady,
+        ...opts
+      } = {}
     ) => {
       let screenshot
       let response
 
       const beforeScreenshot = async (page, response, { element, fullPage = false } = {}) => {
         const timeout = goto.timeouts.action(opts.timeout)
+        const waitForDomOpts = resolveWaitForDom(waitForDom)
 
         let screenshotOpts = {}
         const tasks = [
+          {
+            fn: () => page.evaluate(waitForDomStability, waitForDomOpts),
+            debug: 'beforeScreenshot:waitForDomStability'
+          },
           {
             fn: () => page.evaluate('document.fonts.ready'),
             debug: 'beforeScreenshot:fontsReady'
@@ -170,13 +166,36 @@ module.exports = ({ goto, ...gotoOpts }) => {
       }
 
       const takeScreenshot = async opts => {
-        screenshot = await page.screenshot(opts)
-        const isWhite = await isWhiteScreenshot(screenshot)
-        if (isWhite) {
-          await goto.waitUntilAuto(page, opts)
+        const timeout = goto.timeouts.action(opts.timeout)
+        const elapsed = createElapsed()
+        let retry = 0
+        let isWhite = false
+        let isReady = false
+
+        do {
           screenshot = await page.screenshot(opts)
-        }
-        return { isWhite }
+          isWhite = await isWhiteScreenshot(screenshot)
+          const snapshotResult = await pReflect(getPageSnapshot(page))
+          const pageSnapshot = snapshotResult.isRejected ? {} : snapshotResult.value
+          const pageReadyResult = await pReflect(
+            opts.isPageReady({
+              page,
+              response: opts.response,
+              screenshot,
+              isWhite,
+              isWhiteScreenshot,
+              ...pageSnapshot
+            })
+          )
+          isReady = !pageReadyResult.isRejected && !!pageReadyResult.value
+
+          if (isReady || elapsed() >= timeout) break
+
+          retry += 1
+          await goto.waitUntilAuto(page, { timeout })
+        } while (!isReady)
+
+        return { isWhite, isReady, retry }
       }
 
       const onDialog = dialog => pReflect(dialog.dismiss())
@@ -194,8 +213,19 @@ module.exports = ({ goto, ...gotoOpts }) => {
           ;({ response } = await goto(page, { ...opts, url, waitUntil, waitUntilAuto }))
           async function waitUntilAuto (page, { response }) {
             const screenshotOpts = await beforeScreenshot(page, response, opts)
-            const { isWhite } = await takeScreenshot({ ...opts, ...screenshotOpts })
-            debug('screenshot', { waitUntil, isWhite, duration: timeScreenshot() })
+            const { isWhite, isReady, retry } = await takeScreenshot({
+              ...opts,
+              ...screenshotOpts,
+              isPageReady,
+              response
+            })
+            debug('screenshot', {
+              waitUntil,
+              isReady,
+              isWhite,
+              retry,
+              duration: timeScreenshot()
+            })
           }
         }
 
@@ -210,3 +240,6 @@ module.exports = ({ goto, ...gotoOpts }) => {
 }
 
 module.exports.isWhiteScreenshot = isWhiteScreenshot
+module.exports.waitForDomStability = waitForDomStability
+module.exports.resolveWaitForDom = resolveWaitForDom
+module.exports.DEFAULT_WAIT_FOR_DOM = DEFAULT_WAIT_FOR_DOM
