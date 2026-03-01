@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.10.2](https://github.com/microlinkhq/browserless/compare/v10.10.1...v10.10.2) (2026-03-01)
+
+### Bug Fixes
+
+* **goto:** await interception setup before navigation ([#668](https://github.com/microlinkhq/browserless/issues/668)) ([7249bd2](https://github.com/microlinkhq/browserless/commit/7249bd2899095249fa60eb728b14c9c6ee02e081))
+* **goto:** cancel stopLoading timer after navigation settles ([#667](https://github.com/microlinkhq/browserless/issues/667)) ([dd3e35e](https://github.com/microlinkhq/browserless/commit/dd3e35e7afbfb3c3da257dad63114df5782c7e99))
+* **goto:** scope abortTypes interception per call ([#669](https://github.com/microlinkhq/browserless/issues/669)) ([d8cf326](https://github.com/microlinkhq/browserless/commit/d8cf3266963b5d55f21c322088d9bdb2736cdb58))
+
+### Performance Improvements
+
+* **browserless:** avoid browser lookup on createPage ([#681](https://github.com/microlinkhq/browserless/issues/681)) ([23ac568](https://github.com/microlinkhq/browserless/commit/23ac568434e561fb2e9818248aa7fadd9b99e91f))
+* **browserless:** avoid browser lookups when closing page ([#673](https://github.com/microlinkhq/browserless/issues/673)) ([ebc8d90](https://github.com/microlinkhq/browserless/commit/ebc8d906814e28caec7dea37b1c4a390c9829e40))
+* **browserless:** clear per-request cleanup timers ([#662](https://github.com/microlinkhq/browserless/issues/662)) ([21b7366](https://github.com/microlinkhq/browserless/commit/21b73661235a36ed830d6cc7d5c851b95681e9e4))
+* **browserless:** retry only transient context reset errors ([#663](https://github.com/microlinkhq/browserless/issues/663)) ([43c1061](https://github.com/microlinkhq/browserless/commit/43c1061b61d4283a547e7167788f68d2e0d89e55))
+* **function:** avoid parsing code AST twice ([#674](https://github.com/microlinkhq/browserless/issues/674)) ([aed5f04](https://github.com/microlinkhq/browserless/commit/aed5f040f9cc8fd94521d9f62e63209a6aff08f9))
+* **function:** cache browserless factory result per function ([#677](https://github.com/microlinkhq/browserless/issues/677)) ([fc0c72c](https://github.com/microlinkhq/browserless/commit/fc0c72c5b6621881e32d13f0d484149b34ba22ee))
+* **function:** cache code analysis across calls ([#676](https://github.com/microlinkhq/browserless/issues/676)) ([67714e0](https://github.com/microlinkhq/browserless/commit/67714e093082df91c05503953c397b7b36568e05))
+* **function:** prefer page ws endpoint over browser lookup ([#680](https://github.com/microlinkhq/browserless/issues/680)) ([7fb19f4](https://github.com/microlinkhq/browserless/commit/7fb19f48b07a14dd53e46fee76c5eb63c2e56483))
+* **function:** reuse browser websocket endpoint lookup ([#675](https://github.com/microlinkhq/browserless/issues/675)) ([957e255](https://github.com/microlinkhq/browserless/commit/957e25557a8cae6368835f8f77ef505bdbb74efd))
+* **function:** reuse prebuilt sandbox template source ([#678](https://github.com/microlinkhq/browserless/issues/678)) ([53fcdd5](https://github.com/microlinkhq/browserless/commit/53fcdd50155d39896d00bd0e46dc882af35e2ebb))
+* **function:** skip ws endpoint lookup for non-page code ([#679](https://github.com/microlinkhq/browserless/issues/679)) ([10ae93c](https://github.com/microlinkhq/browserless/commit/10ae93c2065719f1d65f49282cd805a2770735e1))
+* **goto:** avoid args spread in device lookup ([#682](https://github.com/microlinkhq/browserless/issues/682)) ([860abdf](https://github.com/microlinkhq/browserless/commit/860abdfffa3780b91a5bdfbd054e6d1d18b245eb))
+* **goto:** avoid Object.entries in wait checks ([#683](https://github.com/microlinkhq/browserless/issues/683)) ([55639a5](https://github.com/microlinkhq/browserless/commit/55639a50e051ad10c573b4b4d33577b0fb1a8d40))
+* **goto:** fast-path cookie header parsing ([#672](https://github.com/microlinkhq/browserless/issues/672)) ([3ce8f4e](https://github.com/microlinkhq/browserless/commit/3ce8f4e0b066892b1cb2449ad20febc335ace056))
+* **goto:** skip redundant user-agent extra headers ([#684](https://github.com/microlinkhq/browserless/issues/684)) ([f025a40](https://github.com/microlinkhq/browserless/commit/f025a40d620de5fc077e06dea348e203db7f3ff3))
+* **goto:** use set lookup for abort resource types ([#664](https://github.com/microlinkhq/browserless/issues/664)) ([554f3d1](https://github.com/microlinkhq/browserless/commit/554f3d19f86a332a420c0223390332a5a6a4b571))
+* **screencast:** clean cdp frame listeners on stop ([#671](https://github.com/microlinkhq/browserless/issues/671)) ([0b9ad2b](https://github.com/microlinkhq/browserless/commit/0b9ad2b7238027c6109029decf889c103571d1cf))
+* **screenshot:** clean dialog listeners between captures ([#670](https://github.com/microlinkhq/browserless/issues/670)) ([069f14d](https://github.com/microlinkhq/browserless/commit/069f14d7d255ba8fd197a8ca42b61c1423c0a4fe))
+* **screenshot:** use sharp raw sampling in white detector ([#685](https://github.com/microlinkhq/browserless/issues/685)) ([c74148a](https://github.com/microlinkhq/browserless/commit/c74148a40e7e3892576359e8d8e0fc948012425d))
+
 ## [10.10.1](https://github.com/microlinkhq/browserless/compare/v10.10.0...v10.10.1) (2026-02-26)
 
 ### Bug Fixes

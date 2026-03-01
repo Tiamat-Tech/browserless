@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.10.2](https://github.com/microlinkhq/browserless/compare/v10.10.1...v10.10.2) (2026-03-01)
+
+### Performance Improvements
+
+* **screenshot:** use sharp raw sampling in white detector ([#685](https://github.com/microlinkhq/browserless/issues/685)) ([c74148a](https://github.com/microlinkhq/browserless/commit/c74148a40e7e3892576359e8d8e0fc948012425d))
+
 ## [10.10.1](https://github.com/microlinkhq/browserless/compare/v10.10.0...v10.10.1) (2026-02-26)
 
 **Note:** Version bump only for package @browserless/cli

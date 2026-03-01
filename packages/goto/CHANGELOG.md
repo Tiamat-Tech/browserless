@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.10.2](https://github.com/microlinkhq/browserless/compare/v10.10.1...v10.10.2) (2026-03-01)
+
+### Bug Fixes
+
+* **goto:** await interception setup before navigation ([#668](https://github.com/microlinkhq/browserless/issues/668)) ([7249bd2](https://github.com/microlinkhq/browserless/commit/7249bd2899095249fa60eb728b14c9c6ee02e081))
+* **goto:** cancel stopLoading timer after navigation settles ([#667](https://github.com/microlinkhq/browserless/issues/667)) ([dd3e35e](https://github.com/microlinkhq/browserless/commit/dd3e35e7afbfb3c3da257dad63114df5782c7e99))
+* **goto:** scope abortTypes interception per call ([#669](https://github.com/microlinkhq/browserless/issues/669)) ([d8cf326](https://github.com/microlinkhq/browserless/commit/d8cf3266963b5d55f21c322088d9bdb2736cdb58))
+
+### Performance Improvements
+
+* **goto:** avoid args spread in device lookup ([#682](https://github.com/microlinkhq/browserless/issues/682)) ([860abdf](https://github.com/microlinkhq/browserless/commit/860abdfffa3780b91a5bdfbd054e6d1d18b245eb))
+* **goto:** avoid Object.entries in wait checks ([#683](https://github.com/microlinkhq/browserless/issues/683)) ([55639a5](https://github.com/microlinkhq/browserless/commit/55639a50e051ad10c573b4b4d33577b0fb1a8d40))
+* **goto:** fast-path cookie header parsing ([#672](https://github.com/microlinkhq/browserless/issues/672)) ([3ce8f4e](https://github.com/microlinkhq/browserless/commit/3ce8f4e0b066892b1cb2449ad20febc335ace056))
+* **goto:** skip redundant user-agent extra headers ([#684](https://github.com/microlinkhq/browserless/issues/684)) ([f025a40](https://github.com/microlinkhq/browserless/commit/f025a40d620de5fc077e06dea348e203db7f3ff3))
+* **goto:** use set lookup for abort resource types ([#664](https://github.com/microlinkhq/browserless/issues/664)) ([554f3d1](https://github.com/microlinkhq/browserless/commit/554f3d19f86a332a420c0223390332a5a6a4b571))
+
 ## [10.10.1](https://github.com/microlinkhq/browserless/compare/v10.10.0...v10.10.1) (2026-02-26)
 
 ### Performance Improvements

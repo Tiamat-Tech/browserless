@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.10.2](https://github.com/microlinkhq/browserless/compare/v10.10.1...v10.10.2) (2026-03-01)
+
+### Performance Improvements
+
+* **screencast:** clean cdp frame listeners on stop ([#671](https://github.com/microlinkhq/browserless/issues/671)) ([0b9ad2b](https://github.com/microlinkhq/browserless/commit/0b9ad2b7238027c6109029decf889c103571d1cf))
+
 ## [10.10.1](https://github.com/microlinkhq/browserless/compare/v10.10.0...v10.10.1) (2026-02-26)
 
 **Note:** Version bump only for package @browserless/screencast

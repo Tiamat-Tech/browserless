@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.10.2](https://github.com/microlinkhq/browserless/compare/v10.10.1...v10.10.2) (2026-03-01)
+
+### Performance Improvements
+
+* **browserless:** avoid browser lookup on createPage ([#681](https://github.com/microlinkhq/browserless/issues/681)) ([23ac568](https://github.com/microlinkhq/browserless/commit/23ac568434e561fb2e9818248aa7fadd9b99e91f))
+* **browserless:** avoid browser lookups when closing page ([#673](https://github.com/microlinkhq/browserless/issues/673)) ([ebc8d90](https://github.com/microlinkhq/browserless/commit/ebc8d906814e28caec7dea37b1c4a390c9829e40))
+* **browserless:** clear per-request cleanup timers ([#662](https://github.com/microlinkhq/browserless/issues/662)) ([21b7366](https://github.com/microlinkhq/browserless/commit/21b73661235a36ed830d6cc7d5c851b95681e9e4))
+* **browserless:** retry only transient context reset errors ([#663](https://github.com/microlinkhq/browserless/issues/663)) ([43c1061](https://github.com/microlinkhq/browserless/commit/43c1061b61d4283a547e7167788f68d2e0d89e55))
+* **screenshot:** use sharp raw sampling in white detector ([#685](https://github.com/microlinkhq/browserless/issues/685)) ([c74148a](https://github.com/microlinkhq/browserless/commit/c74148a40e7e3892576359e8d8e0fc948012425d))
+
 ## [10.10.1](https://github.com/microlinkhq/browserless/compare/v10.10.0...v10.10.1) (2026-02-26)
 
 ### Bug Fixes

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.10.2](https://github.com/microlinkhq/browserless/compare/v10.10.1...v10.10.2) (2026-03-01)
+
+### Performance Improvements
+
+* **function:** avoid parsing code AST twice ([#674](https://github.com/microlinkhq/browserless/issues/674)) ([aed5f04](https://github.com/microlinkhq/browserless/commit/aed5f040f9cc8fd94521d9f62e63209a6aff08f9))
+* **function:** cache browserless factory result per function ([#677](https://github.com/microlinkhq/browserless/issues/677)) ([fc0c72c](https://github.com/microlinkhq/browserless/commit/fc0c72c5b6621881e32d13f0d484149b34ba22ee))
+* **function:** cache code analysis across calls ([#676](https://github.com/microlinkhq/browserless/issues/676)) ([67714e0](https://github.com/microlinkhq/browserless/commit/67714e093082df91c05503953c397b7b36568e05))
+* **function:** prefer page ws endpoint over browser lookup ([#680](https://github.com/microlinkhq/browserless/issues/680)) ([7fb19f4](https://github.com/microlinkhq/browserless/commit/7fb19f48b07a14dd53e46fee76c5eb63c2e56483))
+* **function:** reuse browser websocket endpoint lookup ([#675](https://github.com/microlinkhq/browserless/issues/675)) ([957e255](https://github.com/microlinkhq/browserless/commit/957e25557a8cae6368835f8f77ef505bdbb74efd))
+* **function:** reuse prebuilt sandbox template source ([#678](https://github.com/microlinkhq/browserless/issues/678)) ([53fcdd5](https://github.com/microlinkhq/browserless/commit/53fcdd50155d39896d00bd0e46dc882af35e2ebb))
+* **function:** skip ws endpoint lookup for non-page code ([#679](https://github.com/microlinkhq/browserless/issues/679)) ([10ae93c](https://github.com/microlinkhq/browserless/commit/10ae93c2065719f1d65f49282cd805a2770735e1))
+
 ## [10.10.1](https://github.com/microlinkhq/browserless/compare/v10.10.0...v10.10.1) (2026-02-26)
 
 **Note:** Version bump only for package @browserless/function
